@@ -1,24 +1,26 @@
-## 7. Adaptive Risk Minimization: A Meta-Learning Approach for Tackling Group Shift
+# 7. Adaptive Risk Minimization: A Meta-Learning Approach for Tackling Group Shift
 
 > tags:
 >
 > \#Meta Learning
 >
+> \#Meta Learner
+>
 > \#Group Shift
 
-### 论文信息
+## 论文信息
 
 * 文献链接：https://arxiv.org/abs/2007.02931
-* 官方博客：https://ai.stanford.edu/blog/adaptive-risk-minimization/
+* 官方博客：[Adapting on the Fly to Test Time Distribution Shift](https://ai.stanford.edu/blog/adaptive-risk-minimization/)
 * 2020/11/29，ICLR2021在审？
 * 参考资料：量子位的知乎文章[李飞飞点赞「ARM」：一种让模型快速适应数据变化的元学习方法 | 开源](https://zhuanlan.zhihu.com/p/276006514)
 * 笔记记于2020/11/29
 
-### 文献总结
+## 文献总结
 
 提出的方法是**自适应风险最小化adaptive risk minimization（ARM）**，
 
-### 内容
+## 内容
 * 背景
   * 这个领域应该叫**unlabeled test time adaptation**，或者说**无标签自适应**，具体的问题叫**Group Shift**
   
@@ -32,15 +34,32 @@
   * 进一步有**motivation**：此类方法的缺点是比较specific，不能general adaptive。要general一点，本文的idea以上面的例子说明，训练数据的信息不一定只靠监督的labels，每个用户都可以有一些meta data（特征）来指导用户数据分组，或者说是调整分布
   
   * 一个指出domain adaption缺点的idea是它们的方法一般在训练过程就可以同时get目标域、源域数据，只能说关注目标域特征，但是和真正的测试泛化有些差距（*我觉得有道理但是说不清楚，那谁能达到测试泛化？*）
+
+* 方法
+
+  * 基本假设：方法的一个主要操作是兼容了元学习，方式是采用了类似于元学习中损失（目标）的形式。有两个设计上的idea：
   
-![哦哈](https://ai.stanford.edu/blog/assets/img/posts/2020-11-05-adaptive-risk-minimization/arm.gif)
+    * 第一个假设是训练数据是按组提供的，该假设有好几篇参考文献，看着挺nb——idea来自于要适用于现实世界的问题，以上文的例子好理解
+    
+    * 第二个假设是观察所有测试点的批次，而不是一次只观察一个点——idea是要用厉害和易于处理的方法
+  
+  * 官方博客给出了两张图见下，第一张是优化目标的训练过程，第二张是文章方法的思想来源之一（感觉都是元学习的使用方式）
 
-![哇哈](https://ai.stanford.edu/blog/assets/img/posts/2020-11-05-adaptive-risk-minimization/methods.png)
+    ![哦哈](https://ai.stanford.edu/blog/assets/img/posts/2020-11-05-adaptive-risk-minimization/arm.gif)
+    ![哇哈](https://ai.stanford.edu/blog/assets/img/posts/2020-11-05-adaptive-risk-minimization/methods.png)
 
-方法的一个主要操作是兼容了元学习，方式是采用了类似于元学习中损失（目标）的形式。有两个设计上的idea：
+  * 具体的训练目标，我觉得是**一般**的，比较容易理解，还是一般的元学习方法，所以我认为这就是元学习，只是套了一层壳子。**打个比方就是别人写过一篇某领域的综述了，我偏偏要把概念换一下，重新写一遍**。本文虽然说要针对group shift这种问题，解决用户（测试）数据分布偏移的情况，引入元数据进行引导，但方法上没有什么创新，就是一套元学习，当然这是我自己的看法，怼了一波欢迎指正。
+  
+    另外，本文的方法如果说有什么让人眼前一亮的，那就是优化算法中的Test time adaptation procedure了，在我之前的尝试中都是直接拿练好的base model做预测，meta model就扔了（应该可以在用一下提取元信息的）；本文在测试的时候重复了此过程，从训练数据得到热启动的参数再取调整后的base model，很有MAML+MWN的味道，可以说是**练出来一个元学习器出来**啦！
+  
+  * 最后放上真正的个人笔记
+  
+    > 链接：https://pan.baidu.com/s/1yNXaAn1tYwTyfFLaGjQfDg
+    
+    > 提取码：1234
+    
+    > 复制这段内容后打开百度网盘手机App，操作更方便哦--来自百度网盘超级会员V4的分享
 
-* 第一个假设是训练数据是按组提供的，该假设有好几篇参考文献，看着挺nb——idea来自于要适用于现实世界的问题，以上文的例子好理解
+## 参考文献
 
-* 第二个假设是观察所有测试点的批次，而不是一次只观察一个点——idea是要用厉害和易于处理的方法
-
-TBU
+To be updated.
