@@ -12,9 +12,10 @@
 
 * 文献链接：https://arxiv.org/abs/2007.02931
 * 官方博客：[Adapting on the Fly to Test Time Distribution Shift](https://ai.stanford.edu/blog/adaptive-risk-minimization/)
+* [Openview](https://openreview.net/forum?id=MA8eT-vUPvZ)，众神博弈🐂
 * 2020/11/29，ICLR2021在审？
 * 参考资料：量子位的知乎文章[李飞飞点赞「ARM」：一种让模型快速适应数据变化的元学习方法 | 开源](https://zhuanlan.zhihu.com/p/276006514)
-* 笔记记于2020/11/29
+* 笔记记于2020/11/29，最后更新于12/01
 
 ## 文献总结
 
@@ -59,7 +60,19 @@
     > 提取码：1234
     
     > 复制这段内容后打开百度网盘手机App，操作更方便哦--来自百度网盘超级会员V4的分享
+    
+## 补充
+
+> 2020/12/01更新
+
+在[Openview](https://openreview.net/forum?id=MA8eT-vUPvZ)上看了所有相关的讨论，三个审稿的评分分别是3、4、5，在作者一一回答后改为5、6、7。大家普遍的疑问主要是：
+
+* Group shift本身确实比较specific，有人质疑这不就是领域自适应等方向么。的确是，不过本文强调的是具体的group shift，这是第一点；第二点是其中包括了无标签的适应方案，模型不假设在训练时可以从目标域访问任何标记或未标记的示例，还是和一般问题略有区别的
+
+* 本文的ARM作为一种元学习的方法，有人质疑这比较普通，就是一般的元学习。作者回应本文确实是用一般的元学习解决特定问题，但是一般的元学习主要关注标签适应，本文ARM提供了一个框架，扩展元学习工具，具体是无标签的适应，并在group shift上验证了有效性
+
+* 最后还有一点是有人对于模型的insight，或者说对于具体的group shift中分布的shift提出疑问，因为原文确实没有太多提及分布。作者的回答我不太明白，感觉有点含糊，大概是表达实验验证了分布之间的区别，只是粗略解释了元学习适应多个未标记数据点，进而观察分布是合理的
 
 ## 参考文献
 
-To be updated.
+Zhang, M., Marklund, H., Gupta, A., Levine, S., & Finn, C. (2020). Adaptive Risk Minimization: A Meta-Learning Approach for Tackling Group Shift. ArXiv, abs/2007.02931.
