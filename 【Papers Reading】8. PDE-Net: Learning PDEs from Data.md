@@ -56,6 +56,7 @@
           <li>approximate the nonlinear response by deep neural networks or other machine learning methods</li></ul>
     </li>
     <li>constrains are carefully designed by fully exploiting the relation between the orders of differential operators and the orders of sum rules of filters</li>
+    <li>每一步预测用$\delta t$block，$\delta t$指的是$(7)$式中的步长。具体就是按照文章假设$(7)$式，从轨线网格中通过卷积计算偏导估计，再统一输入网络$F$计算下一步的数值。多个$\delta t$block参数共享合在一起就是PDE-Net，目标是保持长时预测能力，自然的损失就是数据网格上所有点的平方误差和。若限制卷积核则称模型为constrained PDE Net</li>
   </ul>
 </body>
 </td>
@@ -65,10 +66,11 @@
 <body>
   <ul type="disc">
     Pros:
-    <li>more flexible by learning both differential operators and the nonlinear response function of the underlying PDE model</li>
+    <li>相对于常规拟合，more flexible by learning both differential operators and the nonlinear response function of the underlying PDE model</li>
+    <li>本文underlying物理规律体现在卷积核上，练出来是啥样就代表什么样的偏导存在</li>
     <li>all filters are properly constrained, which enables us to easily identify the governing PDE models while still maintaining the expressive and predictive power of the network</li>
     <li>constrains are carefully designed</li>
-    <li>predict the dynamical behavior for a relatively long time, even in a noisy environment</li>
+    <li>由于采用多$\delta t$block监督所有数据，可以predict the dynamical behavior for a relatively long time, even in a noisy environment</li>
     Cons:
     <li>data-->data driven</li>
     <li>combine neural network</li>
@@ -85,6 +87,14 @@
 <tr><td>Row:6 Cell:1</td></tr>
 </table>
 <p><small>Created with the <a href="http://www.pcjson.com/htmltable/" target="_blank">HTML Table Generator</a>, edited and modified by Max</small></p>
+
+## 文献细节
+
+* 如何验证learnable filters的有效性？实验比较被限制的卷积核和固定卷积核的结果
+
+* 怎么限制filters的？对moment matrices操作，这个定义只在文章和[外网](https://en.wikipedia.org/wiki/Moment_matrix)上搜到，文章内从$(5)$式开始定义，
+mei
+* 理论上大的filter可以估计高维偏导，但一方面估计误差加大，另一方面计算更复杂，再者不优美
 
 ## 参考文献
 
